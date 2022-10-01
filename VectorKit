@@ -1,0 +1,81 @@
+local Class = require(script.Class)
+
+local vectorPoint = Class:extend()
+
+function vectorPoint:new(x, y, z)
+	self.x = x
+	self.y = y
+	self.z = z
+end
+
+function vectorPoint:create2Vectors(x, y, z)
+	self.x2 = x
+	self.y2 = y
+	self.z2 = z
+end
+
+function vectorPoint:GetMagnitude()
+	if self.z == nil then
+		return math.abs(math.sqrt(self.x*self.x + self.y*self.y))
+	else
+		return math.abs(math.sqrt(self.x*self.x + self.y*self.y + self.z * self.z))
+	end
+end
+
+function vectorPoint:Get2Magnitude()
+	if self.z2 == nil then
+		return math.abs(math.sqrt(self.x2*self.x2 + self.y2*self.y2))
+	else
+		return math.abs(math.sqrt(self.x2*self.x2 + self.y2*self.y2 + self.z2 * self.z2))
+	end
+end
+
+function vectorPoint:ScalarMultiplier(x,y,z)
+	if z == nil and self.z ~= nil or z ~= nil and self.z == nil then
+		return "Syntax Error"
+	else
+		if z == nil then
+			return x * self.x, y * self.y
+		else
+			return x * self.x, y * self.y, z * self.z
+		end
+	end
+end
+
+function vectorPoint:Scalar2Multiplier(x,y,z)
+	if z == nil and self.z2 ~= nil or z ~= nil and self.z2 == nil then
+		return "Syntax Error"
+	else
+		if z == nil then
+			return x * self.x2, y * self.y2
+		else
+			return x * self.x2, y * self.y2, z * self.z2
+		end
+	end
+end
+
+function vectorPoint:vectorSum(x,y,z)
+	if z == nil and self.z ~= nil or z ~= nil and self.z == nil then
+		return "Syntax Error"
+	else
+		if z == nil then
+			return x + self.x, y + self.y
+		else
+			return x + self.x, y + self.y, z + self.z
+		end
+	end
+end
+
+function vectorPoint:vector2Sum(x,y,z)
+	if z == nil and self.z2 ~= nil or z ~= nil and self.z2 == nil then
+		return "Syntax Error"
+	else
+		if z == nil then
+			return x + self.x2, y + self.y2
+		else
+			return x + self.x2, y + self.y2, z + self.z2
+		end
+	end
+end
+
+return vectorPoint
